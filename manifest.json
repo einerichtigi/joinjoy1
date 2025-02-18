@@ -1,0 +1,21 @@
+{
+  "name": "oflinelal",
+  "short_name": "coolhub",
+  "description": "Meine Web-App für Offline-Nutzung",
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "background_color": "#800080",
+  "theme_color": "#800080",
+  "icons": [
+    {
+      "src": "123.png",
+      "sizes": "200x200",
+      "type": "image/png"
+    },
+    {
+      "src": "123.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

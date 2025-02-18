@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="123.png">
+    <title>ausza</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: white;
+        }
+        .circle {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const colors = ["blue", "yellow", "green", "purple", "pink"];
+        let touches = {};
+        let activeIndex = 0;
+        let interval;
+        let selectionTimeout;
+        let finalColor = null
+
+        let selectionTime = localStorage.getItem("selectionTime") || 5;
+
+        function createCircle(id, x, y) {
+            let circle = document.createElement("div");
+            circle.classList.add("circle");
+            circle.style.backgroundColor = colors[id % colors.length];
+            circle.style.left = `${x - 40}px`;
+            circle.style.top = `${y - 40}px`;
+            document.body.appendChild(circle);
+            touches[id] = { circle, x, y };
+
+            if (Object.keys(touches).length > 1 && !interval) {
+                interval = setInterval(highlightNext, 500);
+            }
+
+            if (!selectionTimeout) {
+                selectionTimeout = setTimeout(selectFinalColor, selectionTime * 1000);
+            }
+        }
+
+        function updateCircle(id, x, y) {
+            if (touches[id]) {
+                touches[id].circle.style.left = `${x - 40}px`;
+                touches[id].circle.style.top = `${y - 40}px`;
+            }
+        }
+
+        function removeCircle(id) {
+            if (touches[id]) {
+                document.body.removeChild(touches[id].circle);
+                delete touches[id];
+                if (Object.keys(touches).length === 0) {
+                    clearInterval(interval);
+                    interval = null;
+                    document.body.style.backgroundColor = "white";
+                }
+            }
+        }
+
+        function highlightNext() {
+            let keys = Object.keys(touches);
+            if (keys.length > 1) {
+                activeIndex = (activeIndex + 1) % keys.length;
+            }
+        }
+
+        function selectFinalColor() {
+            let keys = Object.keys(touches);
+            if (keys.length > 0) {
+                let randomKey = keys[Math.floor(Math.random() * keys.length)];
+                finalColor = touches[randomKey].circle.style.backgroundColor;
+                document.body.style.backgroundColor = finalColor;
+                clearInterval(interval);
+                setTimeout(function() {
+                window.location.href = "ne.html";
+                }, 3000);
+            }
+        }
+
+        window.addEventListener("pointerdown", (event) => {
+            createCircle(event.pointerId, event.clientX, event.clientY);
+        });
+
+        window.addEventListener("pointermove", (event) => {
+            updateCircle(event.pointerId, event.clientX, event.clientY);
+        });
+
+        window.addEventListener("pointerup", (event) => {
+            removeCircle(event.pointerId);
+        });
+    </script>
+</body>
+</html>

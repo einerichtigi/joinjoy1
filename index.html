@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="123.png">
+        <link rel="stylesheet" href="/CSS/global.css">
+        <link rel="icon" href="/img/icon.png">
+        <link rel="manifest" href="manifest.json">  
+  <title>Ladebildschirm</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #800080;
+    }
+    
+    #lal{position: inherit;
+        margin: 10;  
+        padding: 10;
+        font-size: 15px;
+        border-radius: 0%;
+        background-color: #800080;
+        color: #00fff2;
+        position: fixed;top: 20px;right: 10px;
+        display: block;
+        animation: squish1 15s infinite ;
+        width: 100px
+        
+          
+        }
+
+
+    #loader {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: transform 0.5s, opacity 0.5s;
+    }
+
+    #img1 {
+      animation: squish1 10s infinite;
+    }
+
+    #img2 {
+      animation: squish2 10s infinite;
+    }
+
+    @keyframes squish1 {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      25% {
+        transform: scale(1.2, 0.5);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1);
+        opacity: 0;
+      }
+      75% {
+        transform: scale(0.5, 1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes squish2 {
+      0% {
+        transform: scale(1);
+        opacity: 0;
+      }
+      25% {
+        transform: scale(0.5, 1.2);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      75% {
+        transform: scale(1.2, 0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="lal">
+   <p>Powerd by Kasten studios</p>
+  </div>
+</body>
+
+</body>
+<body>
+  <div id="loader">
+    <img src="bild1.png" id="img1" class="image">
+    <img src="bild2.png" id="img2" class="image">
+  </div>
+ <script>   installButton.addEventListener("click", () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === "accepted") {
+                console.log("User installed the app");
+                installButton.style.display = "none";
+            }
+            deferredPrompt = null;
+        });
+    }
+});
+
+window.addEventListener("appinstalled", () => {
+    console.log("App wurde installiert");
+    installButton.style.display = "none";
+});
+</script>    
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+        .then(() => console.log("Service Worker registriert"))
+        .catch(error => console.log("Service Worker Fehler:", error));
+}
+</script>  
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(() => console.log("Service Worker registriert"))
+      .catch((error) => console.log("Service Worker Fehler:", error));
+  }
+</script>
+<script>
+function selectTime(seconds) {
+    localStorage.setItem("selectionTime", seconds);
+    window.location.href = "s2.html";
+}
+</script>
+</body>
+</html>
+</script>
+  <script>
+    setTimeout(function() {
+      window.location.href = "home.html";
+    }, 10000); // 10 Sekunden warten und dann zu home.html weiterleiten
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/CSS/global.css">
+        <link rel="icon" href="/img/icon.png">
+        <link rel="manifest" href="manifest.json">  
+        <title>ausza</title>
+    </head>     
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auswahlseite</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: purple;
+            text-align: center;
+        }
+        .selection-menu {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+        .btn-5 { background-color: red; }
+        .btn-10 { background-color: blue; }
+        .btn-20 { background-color: orange; }
+        .btn-20 { background-color: orange; }
+    </style>
+</head>
+<body>
+    <div class="selection-menu">
+        <button class="btn-1" onclick="selectTime(20)">20 Sekunden</button>
+    </div>
+
+    <script>
+        function selectTime(seconds) {
+            localStorage.setItem("selectionTime", seconds);
+            window.location.href = "s2.html";
+        }
+    </script>
+</body>
+</html>
+</head>
+<body>
+    <div class="selection-menu">
+        <h2>Wähle die Auswahlzeit</h2>
+        <button class="btn-5" onclick="selectTime(5)">5 Sekunden</button>
+        <button class="btn-10" onclick="selectTime(10)">10 Sekunden</button>
+        <button class="btn-20" onclick="selectTime(20)">20 Sekunden</button>
+    </div>
+
+    <script>
+        function selectTime(seconds) {
+            localStorage.setItem("selectionTime", seconds);
+            window.location.href = "s2.html";
+        }
+    </script>
+</body>
+</html>

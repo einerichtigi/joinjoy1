@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="123.png">
+    <title>ausza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color:#800080;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #03d2f7;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+            color: white;
+        }
+        h1 {
+            font-size: 20px;
+        }
+        #satz {
+            font-size: 18px;
+            margin: 20px 0;
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        button {
+            background: #136bf0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #af02be;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Zufällige Pflichtaufgabe</h1>
+        <p id="satz" style="display:none;"></p>
+        <button onclick="zeigeZufaelligenSatz()">Start</button>
+        <button id="okayButton" style="display:none;" onclick="weiterleiten()">Okay</button>
+        <button id="nochmalButton" style="display:none;" onclick="zeigeZufaelligenSatz()">Geht nicht</button>
+    </div>
+
+    <script>
+        const saetze = [
+        "Schreibe deinem Ex eine Nachricht mit 'Ich vermisse dich...' und schicke sie ab.",  
+          "Sing ein Lied in der Öffentlichkeit, so laut du kannst.",  
+          "Ruf deine Mutter an und frage sie, ob sie dein Lieblingskuscheltier noch hat.",  
+          "Poste auf Social Media: 'Ich habe heute meine Socken falsch herum getragen, fühlt sich revolutionär an.'",  
+          "Laufe rückwärts eine ganze Straße entlang und tu so, als wäre es völlig normal.",  
+          "Schicke deinem Lehrer oder Chef eine Nachricht mit nur einem Herz-Emoji.",  
+          "Les einen Absatz aus einem Erotikroman laut vor.",  
+          "Frage eine fremde Person nach ihrer Nummer und tu so, als wäre es ein Notfall.",  
+          "Trage deine Unterhose auf dem Kopf für die nächsten 5 Minuten.",  
+          "Tanze auf einem öfentlichen platz ein TikTok-Tanz.",  
+          "Erkläre jemandem völlig ernsthaft, dass du an Einhörner glaubst.",  
+          "Frage einen Freund, ob du seine Zahnbürste ausleihen darfst.",  
+          "Gehe in einen Supermarkt und frage nach Milch für deine Katze – obwohl du gar keine hast.",  
+          "Imitiere für 10 Minuten eine berühmte Person und höre nicht auf, egal was passiert.",  
+          "Ruf bei einer Pizzeria an und bestelle eine Pizza ohne Belag.",  
+          "Schreibe auf WhatsApp 'Ich muss dir was sagen...' und antworte dann 1 Stunde lang nicht.",  
+          "Les alle deine letzten drei Nachrichten laut vor.",  
+          "Setze dich in ein Café und tu so, als würdest du mit einem unsichtbaren Freund streiten.",  
+          "Geb vor, dass du eine Spinne auf deinem Arm hast und flippe total aus.",  
+          "Zieh eine Socke aus und rieche sie lautstark, als wäre sie das Beste, was du je gerochen hast.",  
+          "Gib einem fremden Menschen auf der Straße spontan ein Kompliment.",  
+          "Tu so, als würdest du mit deinem Spiegelbild streiten.",  
+          "Ruf einen Pizzaservice an und frage, ob sie auch Spaghetti liefern.",  
+          "Gehe auf die Straße und rufe laut 'Ich liebe dich!' ohne Kontext.",  
+          "Poste ein peinliches Kinderfoto von dir auf Social Media.",  
+          "Nimm einen Schluck Wasser und versuche ihn 30 Sekunden lang im Mund zu behalten.",  
+          "Zieh deine Schuhe aus und gehe für 5 Minuten barfuß draußen herum.",  
+          "Sage jemandem, dass er eine Spinatfleck auf den Zähnen hat, auch wenn es nicht stimmt.",  
+          "Schicke einer zufälligen Nummer ein Bild von deinen Füßen.",  
+          "Les einen peinlichen Satz laut in einer überfüllten Gegend vor.",  
+          "Poste auf Social Media: 'Glaubt ihr, dass Aliens unter uns sind? #ErnstgemeinteFrage'",  
+          "Gehe in einen Laden und frage nach einer Ware, die es definitiv nicht gibt.",  
+          "Versuche, mit deinem Zeh deine Nase zu berühren.",  
+          "Rufe eine zufällige Nummer an und sag: 'Es ist vollbracht...'",  
+          "Schreibe deinem Crush: 'Denkst du manchmal an mich?'",  
+          "Gehe mit zwei verschiedenen Schuhen in die Öffentlichkeit.",  
+          "Erkläre jemandem, warum du gerade in einem Paralleluniversum warst.",  
+          "Iss einen Löffel Ketchup pur.",  
+          "Schminke dich mit geschlossenen Augen.",  
+          "Gib vor, ein Telefonat mit einer berühmten Person zu führen.",  
+          "Rappe spontan über das Wetter.",  
+          "Sage deinem Sitznachbarn 'Ich glaube, ich bin ein Zauberer, aber sag’s keinem.'",  
+          "Schreibe in eine fremde Gruppe 'Hallo, ich bin jetzt auch hier!'",  
+          "Gehe zu einem fremden Tisch in einem Café und setze dich einfach dazu.",  
+          "Schreibe auf Social Media: 'Hat jemand ein gutes Rezept für Fußsuppe?'",  
+          "Versuche, mit einem Stift zwischen den Zähnen zu schreiben.",  
+          "Ruf jemanden an und atme nur schwer ins Telefon.",  
+          "Sing einen Song komplett falsch, aber voller Überzeugung.",  
+          "Erfinde einen neuen Tanz und führe ihn jemandem vor.",  
+          "Gib jemandem eine überdramatische Umarmung.",  
+          "Sage für 10 Minuten lang nur Fragen.",  
+          "Geb vor, dass du einen Geist siehst, und reagiere völlig panisch.",  
+          "Lass jemanden fremdes eine Nummer zwischen 1 und 100 sagen und geh dann einfach.",  
+          "Steh mitten im Raum still und starre 1 Minute lang eine Person an.",  
+          "Schreibe deinem Ex: 'Ich habe immer noch dein Ladekabel, willst du es zurück?'",  
+          "Iss einen rohen Knoblauchzeh.",  
+          "Gehe in eine WhatsApp-Gruppe und schicke nur eine einzelne Kartoffel-Emoji.",  
+          "Les die letzten 5 Nachrichten auf deinem Handy laut vor.",  
+          "Versuche, eine Person davon zu überzeugen, dass du eine geheime Superkraft hast.",  
+          "Sag einer fremden Person, dass sie sehr inspirierend aussieht.",  
+          "Schicke einem Freund eine Sprachnachricht, in der du nur lachst.",  
+          "Tu so, als würdest du in Zeitlupe kämpfen.",  
+          "Stecke deine Hand in eine Schüssel voller kaltem Wasser für 1 Minute.",  
+          "Versuche, mit einem Stift zwischen den Zähnen zu schreiben.",  
+          "Rufe jemanden an und sage nur 'Hallo!' und lege dann auf.",  
+          "Schreibe 'Ich bin ein Waschbär' als Kommentar unter den neuesten Post einer bekannten Person.",  
+          "Steh mitten in einem Geschäft und klatsche laut in die Hände.",  
+          "Stell dich auf einen Stuhl und sag laut: 'Ich habe die Kontrolle über dieses Haus!'",  
+          "Schreibe in eine fremde Gruppe 'Hallo, ich bin jetzt auch hier!'",  
+          "Versuche, mit den Augen zu blinzeln und gleichzeitig mit den Ohren zu wackeln.",  
+          "Sprich 10 Sekunden lang wie ein Roboter.",  
+          "Geh zum Supermarkt und frage nach dem besten Mittel gegen unsichtbare Monster.",  
+          "Sprich mit einem imaginären Freund, als wäre er real.",  
+          "Rufe einen Freund an und singe ihm ein Ständchen.",  
+          "Gehe zu einem Café und bestelle 'Was derjenige vor mir hatte.'",  
+          "Sprich so laut wie möglich und rede dabei völlig wirres Zeug.",  
+          "Zieh dir zwei verschiedene Socken an und erzähle jedem, dass es der neueste Trend ist.",  
+          "Tu so, als hättest du einen unsichtbaren Freund, der immer bei dir ist.",  
+          "Sing den ganzen Weg zu einem Laden laut, als würdest du in einem Musical sein.",  
+          "Gehe in ein öffentliches Gebäude und sage 'Ich bin der neue König!' und nicke jedem zu.",  
+            "Singe ein Lied laut vor allen.", "Mache zehn Liegestütze.", "Schreibe jemandem 'Ich liebe dich' ohne Erklärung.",
+            "Trinke ein Glas Wasser auf ex.", "Laufe eine Runde um das Haus.", "Tanze eine Minute ohne Musik.",
+            "Poste ein peinliches Foto von dir.", "Erzähle einen schlechten Witz.", "Klopfe an die Tür eines Nachbarn und sage 'Hallo!'.",
+            "Schließe für fünf Minuten die Augen und höre zu.", "Imitiere eine berühmte Person.", "Iss einen Löffel Senf.",
+            "Erfinde eine Kurzgeschichte in 30 Sekunden.", "Schreibe mit der schwachen Hand deinen Namen.", "Mache ein Kompliment an die Person links von dir.",
+            "Mach auf dich aufmerksam auf dem marktplatz oder schulhof und sag ich werde euch jetzt etwas vor singen sing aber einfach nur 3 mal Jo.",
+            "Laufe rückwärts durch den Raum.", "Spreche für eine Minute mit einem Akzent.", "Poste den letzten Screenshot aus deiner Galerie.",
+            "Nenne fünf Länder in fünf Sekunden.", "Balanciere einen Gegenstand auf dem Kopf.", "Lächle für eine Minute ohne Grund.",
+            "Tausche dein Oberteil mit jemandem.", "Iss eine Zitrone ohne zu verziehen.", "Tanze in Slow-Motion für 30 Sekunden.",
+            "Schreibe mit den Zehen deinen Namen.", "Mach ein Selfie mit einem ernsten Gesichtsausdruck.", "Sprich rückwärts für eine halbe Minute.",
+            "Kritzle blind ein Bild von jemandem.", "Mach einen Handstand oder versuche es.", "Pfeife ein Lied und lass andere es erraten.",
+            "Rufe eine zufällige Nummer an und sag 'Guten Tag!'.", "Stell dich vor einen Spiegel und sag dreimal deinen Namen.",
+            "Lasse jemanden dein Handy für 30 Sekunden benutzen.", "Beschreibe dein letztes Essen so spannend wie möglich.",
+            "Spiele für eine Minute ein Tier nach.", "Gib allen in der Runde einen neuen Spitznamen.", "Führe eine dramatische Szene aus einem Film auf.",
+            "Schicke einer fremden Nummer ein Emoji.", "Versuche, 20 Sekunden lang nicht zu blinzeln.", "Schreibe ein Wort mit der Nase auf Papier."
+           
+        ];
+
+        function zeigeZufaelligenSatz() {
+            const zufaelligerIndex = Math.floor(Math.random() * saetze.length);
+            document.getElementById("satz").textContent = saetze[zufaelligerIndex];
+            document.getElementById("satz").style.display = "block";
+            document.getElementById("okayButton").style.display = "inline-block";
+            document.getElementById("nochmalButton").style.display = "inline-block";
+        }
+
+        function weiterleiten() {
+            window.location.href = "s2.html";
+        }
+    </script>
+</body>
+</html>

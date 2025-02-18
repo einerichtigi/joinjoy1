@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="123.png">
+    <title>ausza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #message {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4500;
+            margin-top: 20px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Geschafft?</h1>
+    <button onclick="handleJa()">Ja</button>
+    <button onclick="window.location.href='index2.html'">Nein</button>
+    <p id="message"></p>
+
+    <script>
+        function handleJa() {
+            const words = ["supper", "cool", "gut gemacht", "okay", "Nice"];
+            const randomWord = words[Math.floor(Math.random() * words.length)];
+            document.getElementById("message").innerText = randomWord;
+            let audio = new Audio("sound.mp3");
+            audio.play(); 
+           
+
+setTimeout(function() {
+  window.location.href = "home.html";
+}, 10000);
+
+            
+            setTimeout(() => {
+                window.location.href = 'index2.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
